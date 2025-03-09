@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mahmoud hamada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .diagram {
+            position: relative;
+            width: 100%;
+            height: 700px;
+        }
+        
+        .table {
+            position: absolute;
+            width: 220px;
+            background-color: #ffffff;
+            border: 2px solid #2c3e50;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+        }
+        
+        .students-header {
+            background-color: #1abc9c;
+        }
+        
+        .institutes-header {
+            background-color: #9b59b6;
+        }
+        
+        .reviews-header {
+            background-color: #e67e22;
+        }
+        
+        .inquiries-header {
+            background-color: #2ecc71;
+        }
+        
+        .applications-header {
+            background-color: #3498db;
+        }
+        
+        .table-content {
+            padding: 10px 0;
+        }
+        
+        .field {
+            padding: 5px 10px;
+            border-bottom: 1px solid #bdc3c7;
+            display: flex;
+            align-items: center;
+        }
+        
+        .field:last-child {
+            border-bottom: none;
+        }
+        
+        .pk-indicator {
+            width: 15px;
+            height: 15px;
+            background-color: #e74c3c;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        
+        .fk-indicator {
+            width: 15px;
+            height: 15px;
+            background-color: #3498db;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        
+        .students {
+            top: 50px;
+            left: 50px;
+        }
+        
+        .institutes {
+            top: 50px;
+            left: 350px;
+        }
+        
+        .reviews {
+            top: 50px;
+            left: 650px;
+        }
+        
+        .inquiries {
+            top: 330px;
+            left: 150px;
+        }
+        
+        .applications {
+            top: 330px;
+            left: 450px;
+        }
+        
+        .field-name {
+            margin-right: 5px;
+        }
+        
+        /* Relationship lines */
+        .relationship {
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .legend {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            background-color: white;
+            border: 2px solid #2c3e50;
+            border-radius: 5px;
+            padding: 10px;
+            width: 180px;
+        }
+        
+        .legend-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #2c3e50;
+            padding-bottom: 5px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-text {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">مخطط قاعدة بيانات مشروع ايمان </h1>
+        
+        <div class="diagram">
+            <!-- Students Table -->
+            <div class="table students">
+                <div class="table-header students-header">students</div>
+                <div class="table-content">
+                    <div class="field">
+                        <span class="pk-indicator"></span>
+                        <span class="field-name">id (PK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">name</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">email</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">password</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Institutes Table -->
+            <div class="table institutes">
+                <div class="table-header institutes-header">institutes</div>
+                <div class="table-content">
+                    <div class="field">
+                        <span class="pk-indicator"></span>
+                        <span class="field-name">id (PK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">name</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">location</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">tuition_fees</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">specializations</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">description</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reviews Table -->
+            <div class="table reviews">
+                <div class="table-header reviews-header">reviews</div>
+                <div class="table-content">
+                    <div class="field">
+                        <span class="pk-indicator"></span>
+                        <span class="field-name">id (PK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="fk-indicator"></span>
+                        <span class="field-name">student_id (FK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="fk-indicator"></span>
+                        <span class="field-name">institute_id (FK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">rating</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">comment</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Inquiries Table -->
+            <div class="table inquiries">
+                <div class="table-header inquiries-header">inquiries</div>
+                <div class="table-content">
+                    <div class="field">
+                        <span class="pk-indicator"></span>
+                        <span class="field-name">id (PK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="fk-indicator"></span>
+                        <span class="field-name">student_id (FK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="fk-indicator"></span>
+                        <span class="field-name">institute_id (FK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">message</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">response</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Applications Table -->
+            <div class="table applications">
+                <div class="table-header applications-header">applications</div>
+                <div class="table-content">
+                    <div class="field">
+                        <span class="pk-indicator"></span>
+                        <span class="field-name">id (PK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="fk-indicator"></span>
+                        <span class="field-name">student_id (FK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="fk-indicator"></span>
+                        <span class="field-name">institute_id (FK)</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">status</span>
+                    </div>
+                    <div class="field">
+                        <span class="field-name">created_at</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Relationship lines using SVG -->
+            <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0; z-index: -1;">
+                <!-- Students to Reviews -->
+                <path d="M 270,110 C 400,110 520,143 650,143" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                <circle cx="270" cy="110" r="6" fill="#2c3e50"/>
+                <text x="280" y="105" font-family="Arial" font-size="12" fill="#2c3e50">1</text>
+                <text x="640" y="138" font-family="Arial" font-size="16" fill="#2c3e50">*</text>
+                
+                <!-- Institutes to Reviews -->
+                <path d="M 570,110 C 610,110 630,178 650,178" stroke="#9b59b6" stroke-width="2" fill="none"/>
+                <circle cx="570" cy="110" r="6" fill="#2c3e50"/>
+                <text x="580" y="105" font-family="Arial" font-size="12" fill="#2c3e50">1</text>
+                <text x="640" y="173" font-family="Arial" font-size="16" fill="#2c3e50">*</text>
+                
+                <!-- Students to Inquiries -->
+                <path d="M 150,210 C 100,250 100,420 150,423" stroke="#1abc9c" stroke-width="2" fill="none"/>
+                <circle cx="150" cy="210" r="6" fill="#2c3e50"/>
+                <text x="140" y="225" font-family="Arial" font-size="12" fill="#2c3e50">1</text>
+                <text x="140" y="418" font-family="Arial" font-size="16" fill="#2c3e50">*</text>
+                
+                <!-- Institutes to Inquiries -->
+                <path d="M 350,200 C 300,300 300,450 350,458" stroke="#9b59b6" stroke-width="2" fill="none"/>
+                <circle cx="350" cy="200" r="6" fill="#2c3e50"/>
+                <text x="340" y="195" font-family="Arial" font-size="12" fill="#2c3e50">1</text>
+                <text x="340" y="453" font-family="Arial" font-size="16" fill="#2c3e50">*</text>
+                
+                <!-- Students to Applications -->
+                <path d="M 200,210 C 250,280 400,423 450,423" stroke="#1abc9c" stroke-width="2" fill="none"/>
+                <circle cx="200" cy="210" r="6" fill="#2c3e50"/>
+                <text x="205" y="225" font-family="Arial" font-size="12" fill="#2c3e50">1</text>
+                <text x="440" y="418" font-family="Arial" font-size="16" fill="#2c3e50">*</text>
+                
+                <!-- Institutes to Applications -->
+                <path d="M 500,275 C 525,300 525,400 500,458" stroke="#9b59b6" stroke-width="2" fill="none"/>
+                <circle cx="500" cy="275" r="6" fill="#2c3e50"/>
+                <text x="510" y="270" font-family="Arial" font-size="12" fill="#2c3e50">1</text>
+                <text x="490" y="453" font-family="Arial" font-size="16" fill="#2c3e50">*</text>
+            </svg>
+            
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-title">مفتاح الرموز</div>
+                <div class="legend-item">
+                    <div class="pk-indicator"></div>
+                    <div class="legend-text">مفتاح أساسي (PK)</div>
+                </div>
+                <div class="legend-item">
+                    <div class="fk-indicator"></div>
+                    <div class="legend-text">مفتاح أجنبي (FK)</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-text">1 - علاقة واحد</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-text">* - علاقة متعدد</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
